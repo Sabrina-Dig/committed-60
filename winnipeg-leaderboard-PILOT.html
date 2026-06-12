@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Committed 60 — Altea Winnipeg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000000; --frame:#0A0907; --surface:#15130F; --surface2:#1E1B16;
+  --border:#332D24; --border-soft:#2A2620;
+  --bronze:#7A6B57; --bronze2:#93826A; --bronze-bright:#B89B6E;
+  --gold:#C9A86A; --cream:#EFE8D8; --text:#E9E3D6; --muted:#8F887C;
+  --t-strength:#C9A86A; --t-shred:#C2705A; --t-longevity:#8FA98F; --t-endurance:#7E96B8;
+  --pad:4vmin;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;background:var(--bg);overflow:hidden;}
+body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;}
+
+.stage{position:fixed;inset:0;display:flex;flex-direction:column;padding:var(--pad);}
+
+/* header */
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:2vmin;flex-wrap:wrap;margin-bottom:2.4vmin;}
+.wordmark{font-style:italic;font-weight:900;font-size:5vmin;letter-spacing:.02em;text-transform:uppercase;color:transparent;-webkit-text-stroke:.18vmin var(--cream);white-space:nowrap;}
+.wordmark b{color:var(--cream);-webkit-text-stroke:0;font-weight:900;margin-left:.35em;}
+.head-right{text-align:right;margin-left:auto;}
+.club{font-weight:700;font-size:2.6vmin;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.day{font-size:1.9vmin;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:.5vmin;}
+.day b{color:var(--cream);}
+
+/* slides */
+.slides{position:relative;flex:1;min-height:0;}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;display:flex;flex-direction:column;}
+.slide.on{opacity:1;}
+.slide-title{font-style:italic;font-weight:800;font-size:3.8vmin;text-transform:uppercase;letter-spacing:.04em;color:var(--cream);margin-bottom:.7vmin;}
+.slide-sub{font-size:2vmin;color:var(--muted);margin-bottom:2vmin;letter-spacing:.04em;}
+.content{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;}
+
+.bar{height:3.4vmin;background:var(--surface);border:1px solid var(--border-soft);border-radius:1.7vmin;overflow:hidden;position:relative;min-width:8vmin;}
+.fill{height:100%;border-radius:1.7vmin;width:0;transition:width 1.4s cubic-bezier(.2,.7,.2,1);}
+
+/* slide 1 — team race */
+.race-row{display:grid;grid-template-columns:minmax(24vmin,32vmin) 1fr max-content;align-items:center;gap:2.4vmin;padding:1.6vmin 0;}
+.race-team{display:flex;align-items:center;gap:1.4vmin;min-width:0;}
+.chip{width:1.6vmin;height:1.6vmin;border-radius:50%;flex:0 0 auto;}
+.race-name{font-style:italic;font-weight:800;font-size:2.9vmin;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.race-meta{font-size:1.7vmin;color:var(--muted);margin-top:.3vmin;}
+.race-pct{font-weight:700;font-size:3.4vmin;text-align:right;color:var(--cream);min-width:12vmin;}
+.race-pct small{display:block;font-weight:400;font-size:1.5vmin;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.2vmin;}
+
+/* slide 2 — bonus board (auto-fits 4 or 5 teams) */
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(30vmin,44%),1fr));gap:2vmin;align-content:center;}
+.bonus-card{background:linear-gradient(165deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:2vmin;padding:2.4vmin 2.2vmin;display:flex;flex-direction:column;min-width:0;}
+.bonus-card .tname{font-style:italic;font-weight:800;font-size:2.4vmin;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bonus-total{font-weight:700;font-size:6vmin;line-height:1;margin:1.6vmin 0 .5vmin;color:var(--cream);}
+.bonus-lbl{font-size:1.5vmin;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.8vmin;}
+.bk{display:flex;justify-content:space-between;gap:1vmin;font-size:1.8vmin;padding:.8vmin 0;border-top:1px solid var(--border-soft);color:var(--muted);}
+.bk b{color:var(--cream);font-weight:600;}
+.crown{font-size:1.5vmin;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:auto;padding-top:1.4vmin;}
+
+/* slide 3 — leaders */
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:5vmin;align-content:center;height:100%;}
+.lead-row{display:grid;grid-template-columns:max-content 1fr max-content max-content;align-items:center;gap:1.8vmin;padding:1.3vmin .4vmin;border-bottom:1px solid var(--border-soft);min-width:0;}
+.lead-rank{font-style:italic;font-weight:900;font-size:2.7vmin;color:var(--bronze-bright);min-width:4.2vmin;}
+.lead-row.top .lead-rank{color:var(--gold);}
+.lead-name{font-weight:600;font-size:2.4vmin;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.lead-team{font-size:1.5vmin;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.5vmin 1.2vmin;border-radius:2vmin;text-align:center;border:1px solid var(--border-soft);white-space:nowrap;}
+.lead-n{font-weight:700;font-size:2.5vmin;text-align:right;color:var(--cream);white-space:nowrap;}
+.lead-n small{font-size:1.4vmin;color:var(--muted);font-weight:400;margin-left:.4vmin;}
+
+/* slide 4 — interclub */
+.ic-row{display:grid;grid-template-columns:minmax(20vmin,28vmin) 1fr max-content;align-items:center;gap:2.4vmin;padding:1.7vmin 0;}
+.ic-club{font-style:italic;font-weight:800;font-size:2.8vmin;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ic-stats{text-align:right;min-width:14vmin;}
+.ic-stats .line1{font-weight:700;font-size:2.6vmin;color:var(--cream);white-space:nowrap;}
+.ic-stats .line2{font-size:1.7vmin;color:var(--muted);margin-top:.3vmin;white-space:nowrap;}
+
+/* footer */
+.foot{display:flex;align-items:center;justify-content:space-between;gap:2vmin;margin-top:2.2vmin;}
+.dots{display:flex;gap:1.4vmin;}
+.dot{width:7vmin;height:.7vmin;border-radius:.35vmin;background:var(--border);transition:background .4s;}
+.dot.on{background:var(--gold);}
+.tag{font-size:1.6vmin;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:right;}
+
+.preview{position:fixed;top:1.4vmin;right:1.4vmin;font-size:1.5vmin;letter-spacing:.18em;text-transform:uppercase;color:#000;background:var(--gold);padding:.6vmin 1.2vmin;border-radius:.8vmin;font-weight:700;z-index:99;}
+
+/* portrait: stack within rows, single leader column */
+@media (orientation:portrait){
+  .race-row{grid-template-columns:1fr max-content;}
+  .race-team{grid-column:1 / -1;}
+  .race-row .bar{grid-column:1;}
+  .lead-grid{grid-template-columns:1fr;}
+  .ic-row{grid-template-columns:1fr max-content;}
+  .ic-club{grid-column:1 / -1;}
+  .ic-row .bar{grid-column:1;}
+  .tag{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="preview">Preview — Sample Data</div>
+<div class="stage">
+  <div class="head">
+    <div class="wordmark">Committed<b>60</b></div>
+    <div class="head-right">
+      <div class="club" id="club"></div>
+      <div class="day">Day <b id="dayN"></b> of <span id="dayT"></span></div>
+    </div>
+  </div>
+  <div class="slides" id="slides"></div>
+  <div class="foot">
+    <div class="dots" id="dots"></div>
+    <div class="tag">40 Workouts · 60 Days · One Club</div>
+  </div>
+</div>
+
+<script>
+const DATA = {"club": "Altea Winnipeg", "day": 11, "total_days": 60, "teams": {"Strength": {"members": 96, "avg": 3.1, "pct": 7.6, "finished": 2, "bonus": 113, "dealers": 18, "rx": 29, "master": 8, "social": 14}, "Shred": {"members": 105, "avg": 3.1, "pct": 7.7, "finished": 1, "bonus": 122, "dealers": 17, "rx": 23, "master": 12, "social": 8}, "Longevity": {"members": 82, "avg": 3.2, "pct": 8.0, "finished": 3, "bonus": 113, "dealers": 29, "rx": 36, "master": 8, "social": 18}, "Endurance": {"members": 106, "avg": 3.1, "pct": 7.8, "finished": 2, "bonus": 102, "dealers": 27, "rx": 23, "master": 8, "social": 12}, "Sport Performance": {"members": 93, "avg": 2.9, "pct": 7.3, "finished": 2, "bonus": 122, "dealers": 19, "rx": 30, "master": 13, "social": 11}}, "leaders": [{"name": "Marilyn M.", "team": "Longevity", "workouts": 23, "bonus": 0}, {"name": "Manal A.", "team": "Shred", "workouts": 22, "bonus": 0}, {"name": "Paula N.", "team": "Endurance", "workouts": 21, "bonus": 0}, {"name": "Wanda J.", "team": "Endurance", "workouts": 18, "bonus": 0}, {"name": "Elizabeth J.", "team": "Longevity", "workouts": 18, "bonus": 0}, {"name": "Hang N.", "team": "Shred", "workouts": 18, "bonus": 0}, {"name": "Kari G.", "team": "Endurance", "workouts": 16, "bonus": 0}, {"name": "Sushma S.", "team": "Longevity", "workouts": 15, "bonus": 0}, {"name": "Stacey W.", "team": "Endurance", "workouts": 15, "bonus": 0}, {"name": "Kalie M.", "team": "Shred", "workouts": 14, "bonus": 2}, {"name": "Alex V.", "team": "Endurance", "workouts": 14, "bonus": 0}, {"name": "Bryce B.", "team": "Shred", "workouts": 13, "bonus": 3}], "total_signups": 482, "interclub": [{"club": "Winnipeg", "signups": 482, "avgpct": 7.7}, {"club": "Ottawa", "signups": 412, "avgpct": 24.5}, {"club": "Toronto", "signups": 389, "avgpct": 29.1}, {"club": "West 6", "signups": 356, "avgpct": 22.3}, {"club": "AVANT Yorkville", "signups": 248, "avgpct": 31.6}]};
+
+/* CONFIG — editable */
+const CONFIG = {
+  slideSeconds: 12,
+  leadersShown: {landscape: 12, portrait: 10},
+  teamColors: {Strength:'var(--t-strength)', Shred:'var(--t-shred)', Longevity:'var(--t-longevity)', Endurance:'var(--t-endurance)', 'Sport Performance':'#C25A5A', Pickleball:'#A98FC9'},
+  bonusLabels: {dealers:"Dealer's Choice", rx:'Rx Scans', master:'Masterclass', social:'Socials'}
+};
+
+document.getElementById('club').textContent = DATA.club;
+document.getElementById('dayN').textContent = DATA.day;
+document.getElementById('dayT').textContent = DATA.total_days;
+
+const tc = t => CONFIG.teamColors[t] || 'var(--gold)';
+const teams = Object.entries(DATA.teams);
+const isPortrait = () => window.matchMedia('(orientation:portrait)').matches;
+
+/* Slide 1 — team race */
+const s1 = teams.sort((a,b)=>b[1].pct-a[1].pct).map(([t,v])=>`
+  <div class="race-row">
+    <div class="race-team"><span class="chip" style="background:${tc(t)}"></span>
+      <div style="min-width:0"><div class="race-name" style="color:${tc(t)}">Team ${t}</div>
+      <div class="race-meta">${v.members} members · avg ${v.avg} workouts · ${v.finished} finished</div></div></div>
+    <div class="bar"><div class="fill" data-w="${v.pct}" style="background:linear-gradient(90deg,${tc(t)},var(--cream))"></div></div>
+    <div class="race-pct">${v.pct}%<small>to team goal</small></div>
+  </div>`).join('');
+
+/* Slide 2 — bonus board */
+const maxBonus = Math.max(...teams.map(([,v])=>v.bonus));
+const s2 = '<div class="bonus-grid">'+teams.sort((a,b)=>b[1].bonus-a[1].bonus).map(([t,v])=>`
+  <div class="bonus-card" style="${v.bonus===maxBonus?'border-color:var(--gold);':''}">
+    <div class="tname" style="color:${tc(t)}">Team ${t}</div>
+    <div class="bonus-total">${v.bonus}</div>
+    <div class="bonus-lbl">Bonus entries</div>
+    ${Object.entries(CONFIG.bonusLabels).map(([k,l])=>`<div class="bk">${l}<b>${v[k]}</b></div>`).join('')}
+    ${v.bonus===maxBonus?'<div class="crown">★ Leading the bonus race</div>':''}
+  </div>`).join('')+'</div>';
+
+/* Slide 3 — leaders */
+function leadersHTML(){
+  const n = isPortrait() ? CONFIG.leadersShown.portrait : CONFIG.leadersShown.landscape;
+  return '<div class="lead-grid">'+DATA.leaders.slice(0,n).map((m,i)=>`
+    <div class="lead-row ${i<3?'top':''}">
+      <div class="lead-rank">${String(i+1).padStart(2,'0')}</div>
+      <div class="lead-name">${m.name}</div>
+      <div class="lead-team" style="color:${tc(m.team)};border-color:${tc(m.team)}">${m.team}</div>
+      <div class="lead-n">${m.workouts}<small>/ 40</small></div>
+    </div>`).join('')+'</div>';
+}
+
+/* Slide 4 — interclub */
+const maxPct = Math.max(...DATA.interclub.map(c=>c.avgpct));
+const s4 = DATA.interclub.sort((a,b)=>b.avgpct-a.avgpct).map((c,i)=>`
+  <div class="ic-row">
+    <div class="ic-club" style="color:${i===0?'var(--gold)':'var(--cream)'}">${c.club}</div>
+    <div class="bar"><div class="fill" data-w="${100*c.avgpct/Math.max(maxPct,1)}" style="background:linear-gradient(90deg,${i===0?'var(--gold)':'var(--bronze)'},var(--cream))"></div></div>
+    <div class="ic-stats"><div class="line1">${c.avgpct}% · ${c.signups}</div><div class="line2">avg progress · committed</div></div>
+  </div>`).join('');
+
+const slides = [
+  {t:'The Team Race', s:'Average progress toward 40 workouts per member', h:()=>s1},
+  {t:'The Bonus Board', s:"Dealer's Choice · Rx Scans · Masterclasses · Socials", h:()=>s2},
+  {t:'Club Leaders', s:'Most workouts completed — '+DATA.club, h:leadersHTML},
+  {t:'Club vs Club', s:'Which club is most committed?', h:()=>s4}
+];
+
+const wrap = document.getElementById('slides'), dotsEl = document.getElementById('dots');
+slides.forEach((sl)=>{
+  const d = document.createElement('div');
+  d.className='slide';
+  d.innerHTML=`<div class="slide-title">${sl.t}</div><div class="slide-sub">${sl.s}</div><div class="content">${sl.h()}</div>`;
+  wrap.appendChild(d);
+  const dot=document.createElement('div'); dot.className='dot'; dotsEl.appendChild(dot);
+});
+
+let cur=0;
+const els=[...wrap.children], dots=[...dotsEl.children];
+function show(i){
+  els.forEach((e,j)=>e.classList.toggle('on',j===i));
+  dots.forEach((e,j)=>e.classList.toggle('on',j===i));
+  els[i].querySelectorAll('.fill').forEach(f=>{f.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=f.dataset.w+'%'));});
+}
+show(0);
+setInterval(()=>{cur=(cur+1)%slides.length;show(cur);}, CONFIG.slideSeconds*1000);
+
+/* re-render leaders slide on orientation change */
+window.matchMedia('(orientation:portrait)').addEventListener('change',()=>{
+  els[2].querySelector('.content').innerHTML = leadersHTML();
+});
+</script>
+</body>
+</html>
