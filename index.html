@@ -48,6 +48,7 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 .chip{width:1.6vmin;height:1.6vmin;border-radius:50%;flex:0 0 auto;}
 .race-name{font-style:italic;font-weight:800;font-size:2.9vmin;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .race-meta{font-size:1.7vmin;color:var(--muted);margin-top:.3vmin;}
+.race-caps{font-size:1.6vmin;color:var(--bronze-bright);margin-top:.3vmin;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .race-pct{font-weight:700;font-size:3.4vmin;text-align:right;color:var(--cream);min-width:12vmin;}
 .race-pct small{display:block;font-weight:400;font-size:1.5vmin;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.2vmin;}
 
@@ -66,6 +67,7 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 .lead-row{display:grid;grid-template-columns:max-content 1fr max-content max-content;align-items:center;gap:1.8vmin;padding:1.3vmin .4vmin;border-bottom:1px solid var(--border-soft);min-width:0;}
 .lead-rank{font-style:italic;font-weight:900;font-size:2.7vmin;color:var(--bronze-bright);min-width:4.2vmin;}
 .lead-row.top .lead-rank{color:var(--gold);}
+.lead-club{color:var(--muted);font-weight:400;font-size:1.9vmin;}
 .lead-name{font-weight:600;font-size:2.4vmin;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
 .lead-team{font-size:1.5vmin;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.5vmin 1.2vmin;border-radius:2vmin;text-align:center;border:1px solid var(--border-soft);white-space:nowrap;}
 .lead-n{font-weight:700;font-size:2.5vmin;text-align:right;color:var(--cream);white-space:nowrap;}
@@ -118,7 +120,7 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 </div>
 
 <script>
-const DATA = {"club": "Altea Winnipeg", "day": 11, "total_days": 60, "teams": {"Strength": {"members": 96, "avg": 3.1, "pct": 7.6, "finished": 2, "bonus": 113, "dealers": 18, "rx": 29, "master": 8, "social": 14}, "Shred": {"members": 105, "avg": 3.1, "pct": 7.7, "finished": 1, "bonus": 122, "dealers": 17, "rx": 23, "master": 12, "social": 8}, "Longevity": {"members": 82, "avg": 3.2, "pct": 8.0, "finished": 3, "bonus": 113, "dealers": 29, "rx": 36, "master": 8, "social": 18}, "Endurance": {"members": 106, "avg": 3.1, "pct": 7.8, "finished": 2, "bonus": 102, "dealers": 27, "rx": 23, "master": 8, "social": 12}, "Sport Performance": {"members": 93, "avg": 2.9, "pct": 7.3, "finished": 2, "bonus": 122, "dealers": 19, "rx": 30, "master": 13, "social": 11}}, "leaders": [{"name": "Marilyn M.", "team": "Longevity", "workouts": 23, "bonus": 0}, {"name": "Manal A.", "team": "Shred", "workouts": 22, "bonus": 0}, {"name": "Paula N.", "team": "Endurance", "workouts": 21, "bonus": 0}, {"name": "Wanda J.", "team": "Endurance", "workouts": 18, "bonus": 0}, {"name": "Elizabeth J.", "team": "Longevity", "workouts": 18, "bonus": 0}, {"name": "Hang N.", "team": "Shred", "workouts": 18, "bonus": 0}, {"name": "Kari G.", "team": "Endurance", "workouts": 16, "bonus": 0}, {"name": "Sushma S.", "team": "Longevity", "workouts": 15, "bonus": 0}, {"name": "Stacey W.", "team": "Endurance", "workouts": 15, "bonus": 0}, {"name": "Kalie M.", "team": "Shred", "workouts": 14, "bonus": 2}, {"name": "Alex V.", "team": "Endurance", "workouts": 14, "bonus": 0}, {"name": "Bryce B.", "team": "Shred", "workouts": 13, "bonus": 3}], "total_signups": 482, "interclub": [{"club": "Winnipeg", "signups": 482, "avgpct": 7.7}, {"club": "Ottawa", "signups": 412, "avgpct": 24.5}, {"club": "Toronto", "signups": 389, "avgpct": 29.1}, {"club": "West 6", "signups": 356, "avgpct": 22.3}, {"club": "AVANT Yorkville", "signups": 248, "avgpct": 31.6}]};
+const DATA = {"club": "Altea Winnipeg", "day": 11, "total_days": 60, "teams": {"Strength": {"members": 96, "avg": 3.1, "pct": 7.6, "finished": 2, "bonus": 113, "dealers": 18, "rx": 29, "master": 8, "social": 14, "captains": ["Tiffany A.", "Samara M."]}, "Shred": {"members": 105, "avg": 3.1, "pct": 7.7, "finished": 1, "bonus": 122, "dealers": 17, "rx": 23, "master": 12, "social": 8, "captains": ["Jenna G.", "Aleksia D."]}, "Longevity": {"members": 82, "avg": 3.2, "pct": 8.0, "finished": 3, "bonus": 113, "dealers": 29, "rx": 36, "master": 8, "social": 18, "captains": ["YuJie B.", "Lex M."]}, "Endurance": {"members": 106, "avg": 3.1, "pct": 7.8, "finished": 2, "bonus": 102, "dealers": 27, "rx": 23, "master": 8, "social": 12, "captains": ["Gabe M.", "Eric S."]}, "Sport Performance": {"members": 93, "avg": 2.9, "pct": 7.3, "finished": 2, "bonus": 122, "dealers": 19, "rx": 30, "master": 13, "social": 11, "captains": []}}, "leaders": [{"name": "Marilyn M.", "team": "Longevity", "workouts": 23, "bonus": 0}, {"name": "Manal A.", "team": "Shred", "workouts": 22, "bonus": 0}, {"name": "Paula N.", "team": "Endurance", "workouts": 21, "bonus": 0}, {"name": "Wanda J.", "team": "Endurance", "workouts": 18, "bonus": 0}, {"name": "Elizabeth J.", "team": "Longevity", "workouts": 18, "bonus": 0}, {"name": "Hang N.", "team": "Shred", "workouts": 18, "bonus": 0}, {"name": "Kari G.", "team": "Endurance", "workouts": 16, "bonus": 0}, {"name": "Sushma S.", "team": "Longevity", "workouts": 15, "bonus": 0}, {"name": "Stacey W.", "team": "Endurance", "workouts": 15, "bonus": 0}, {"name": "Kalie M.", "team": "Shred", "workouts": 14, "bonus": 2}, {"name": "Alex V.", "team": "Endurance", "workouts": 14, "bonus": 0}, {"name": "Bryce B.", "team": "Shred", "workouts": 13, "bonus": 3}], "allleaders": [{"name": "Maya R.", "club": "OTT", "team": "Shred", "workouts": 24}, {"name": "Marilyn M.", "club": "WPG", "team": "Longevity", "workouts": 23}, {"name": "Manal A.", "club": "WPG", "team": "Shred", "workouts": 22}, {"name": "Liam C.", "club": "TOR", "team": "Strength", "workouts": 22}, {"name": "Priya S.", "club": "AVANT", "team": "Longevity", "workouts": 22}, {"name": "Paula N.", "club": "WPG", "team": "Endurance", "workouts": 21}, {"name": "Dario F.", "club": "W6", "team": "Endurance", "workouts": 21}, {"name": "Anne-Marie L.", "club": "OTT", "team": "Sport Performance", "workouts": 21}, {"name": "Kofi A.", "club": "TOR", "team": "Shred", "workouts": 20}, {"name": "Jess W.", "club": "W6", "team": "Strength", "workouts": 19}, {"name": "Hana K.", "club": "AVANT", "team": "Endurance", "workouts": 19}, {"name": "Wanda J.", "club": "WPG", "team": "Endurance", "workouts": 18}], "total_signups": 482, "interclub": [{"club": "Winnipeg", "signups": 482, "avgpct": 7.7}, {"club": "Ottawa", "signups": 412, "avgpct": 24.5}, {"club": "Toronto", "signups": 389, "avgpct": 29.1}, {"club": "West 6", "signups": 356, "avgpct": 22.3}, {"club": "AVANT Yorkville", "signups": 248, "avgpct": 31.6}]};
 
 /* CONFIG — editable */
 const CONFIG = {
@@ -141,7 +143,7 @@ const s1 = teams.sort((a,b)=>b[1].pct-a[1].pct).map(([t,v])=>`
   <div class="race-row">
     <div class="race-team"><span class="chip" style="background:${tc(t)}"></span>
       <div style="min-width:0"><div class="race-name" style="color:${tc(t)}">Team ${t}</div>
-      <div class="race-meta">${v.members} members · avg ${v.avg} workouts · ${v.finished} finished</div></div></div>
+      <div class="race-meta">${v.members} members · avg ${v.avg} workouts · ${v.finished} finished</div>${(v.captains&&v.captains.length)?`<div class="race-caps">Captains: ${v.captains.join(" · ")}</div>`:""}</div></div>
     <div class="bar"><div class="fill" data-w="${v.pct}" style="background:linear-gradient(90deg,${tc(t)},var(--cream))"></div></div>
     <div class="race-pct">${v.pct}%<small>to team goal</small></div>
   </div>`).join('');
@@ -169,6 +171,18 @@ function leadersHTML(){
     </div>`).join('')+'</div>';
 }
 
+/* Slide 5 — all-club individual leaders */
+function allLeadersHTML(){
+  const n = isPortrait() ? CONFIG.leadersShown.portrait : CONFIG.leadersShown.landscape;
+  return '<div class="lead-grid">'+DATA.allleaders.slice(0,n).map((m,i)=>`
+    <div class="lead-row ${i<3?'top':''}">
+      <div class="lead-rank">${String(i+1).padStart(2,'0')}</div>
+      <div class="lead-name">${m.name} <span class="lead-club">(${m.club})</span></div>
+      <div class="lead-team" style="color:${tc(m.team)};border-color:${tc(m.team)}">${m.team}</div>
+      <div class="lead-n">${m.workouts}<small>/ 40</small></div>
+    </div>`).join('')+'</div>';
+}
+
 /* Slide 4 — interclub */
 const maxPct = Math.max(...DATA.interclub.map(c=>c.avgpct));
 const s4 = DATA.interclub.sort((a,b)=>b.avgpct-a.avgpct).map((c,i)=>`
@@ -182,7 +196,8 @@ const slides = [
   {t:'The Team Race', s:'Average progress toward 40 workouts per member', h:()=>s1},
   {t:'The Bonus Board', s:"Dealer's Choice · Rx Scans · Masterclasses · Socials", h:()=>s2},
   {t:'Club Leaders', s:'Most workouts completed — '+DATA.club, h:leadersHTML},
-  {t:'Club vs Club', s:'Which club is most committed?', h:()=>s4}
+  {t:'Club vs Club', s:'Which club is most committed?', h:()=>s4},
+  {t:'All-Club Leaders', s:'Top individuals across every club', h:allLeadersHTML}
 ];
 
 const wrap = document.getElementById('slides'), dotsEl = document.getElementById('dots');
@@ -207,6 +222,7 @@ setInterval(()=>{cur=(cur+1)%slides.length;show(cur);}, CONFIG.slideSeconds*1000
 /* re-render leaders slide on orientation change */
 window.matchMedia('(orientation:portrait)').addEventListener('change',()=>{
   els[2].querySelector('.content').innerHTML = leadersHTML();
+  els[4].querySelector('.content').innerHTML = allLeadersHTML();
 });
 </script>
 </body>
