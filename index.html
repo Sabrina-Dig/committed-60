@@ -14,7 +14,7 @@
   --bronze:#7A6B57; --bronze2:#93826A; --bronze-bright:#B89B6E;
   --gold:#C9A86A; --cream:#EFE8D8; --text:#E9E3D6; --muted:#8F887C;
   --t-strength:#C9A86A; --t-shred:#C2705A; --t-longevity:#8FA98F; --t-endurance:#7E96B8;
-  --pad:4vmin;
+  --pad:6.5vmin;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;height:100%;background:var(--bg);overflow:hidden;}
@@ -24,74 +24,74 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 
 /* header */
 .head{display:flex;align-items:baseline;justify-content:space-between;gap:2vmin;flex-wrap:wrap;margin-bottom:2.4vmin;}
-.wordmark{font-style:italic;font-weight:900;font-size:5vmin;letter-spacing:.02em;text-transform:uppercase;color:transparent;-webkit-text-stroke:.18vmin var(--cream);white-space:nowrap;}
+.wordmark{font-style:italic;font-weight:900;font-size:5.8vmin;letter-spacing:.02em;text-transform:uppercase;color:transparent;-webkit-text-stroke:.18vmin var(--cream);white-space:nowrap;}
 .wordmark b{color:var(--cream);-webkit-text-stroke:0;font-weight:900;margin-left:.35em;}
 .head-right{text-align:right;margin-left:auto;}
-.club{font-weight:700;font-size:2.6vmin;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
-.day{font-size:1.9vmin;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:.5vmin;}
+.club{font-weight:700;font-size:3vmin;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.day{font-size:2.2vmin;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:.5vmin;}
 .day b{color:var(--cream);}
 
 /* slides */
 .slides{position:relative;flex:1;min-height:0;}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;display:flex;flex-direction:column;}
 .slide.on{opacity:1;}
-.slide-title{font-style:italic;font-weight:800;font-size:3.8vmin;text-transform:uppercase;letter-spacing:.04em;color:var(--cream);margin-bottom:.7vmin;}
-.slide-sub{font-size:2vmin;color:var(--muted);margin-bottom:2vmin;letter-spacing:.04em;}
+.slide-title{font-style:italic;font-weight:800;font-size:4.4vmin;text-transform:uppercase;letter-spacing:.04em;color:var(--cream);margin-bottom:.7vmin;}
+.slide-sub{font-size:2.3vmin;color:var(--muted);margin-bottom:2vmin;letter-spacing:.04em;}
 .content{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;}
 
-.bar{height:3.4vmin;background:var(--surface);border:1px solid var(--border-soft);border-radius:1.7vmin;overflow:hidden;position:relative;min-width:8vmin;}
+.bar{height:4vmin;background:var(--surface);border:1px solid var(--border-soft);border-radius:1.7vmin;overflow:hidden;position:relative;min-width:8vmin;}
 .fill{height:100%;border-radius:1.7vmin;width:0;transition:width 1.4s cubic-bezier(.2,.7,.2,1);}
 
 /* slide 1 — team race */
 .race-row{display:grid;grid-template-columns:minmax(24vmin,32vmin) 1fr max-content;align-items:center;gap:2.4vmin;padding:1.6vmin 0;}
 .race-team{display:flex;align-items:center;gap:1.4vmin;min-width:0;}
 .chip{width:1.6vmin;height:1.6vmin;border-radius:50%;flex:0 0 auto;}
-.race-name{font-style:italic;font-weight:800;font-size:2.9vmin;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.race-meta{font-size:1.7vmin;color:var(--muted);margin-top:.3vmin;}
-.race-caps{font-size:1.6vmin;color:var(--bronze-bright);margin-top:.3vmin;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.race-pct{font-weight:700;font-size:3.4vmin;text-align:right;color:var(--cream);min-width:12vmin;}
-.race-pct small{display:block;font-weight:400;font-size:1.5vmin;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.2vmin;}
+.race-name{font-style:italic;font-weight:800;font-size:3.4vmin;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.race-meta{font-size:2vmin;color:var(--muted);margin-top:.3vmin;}
+.race-caps{font-size:1.9vmin;color:var(--bronze-bright);margin-top:.3vmin;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.race-pct{font-weight:700;font-size:4vmin;text-align:right;color:var(--cream);min-width:12vmin;}
+.race-pct small{display:block;font-weight:400;font-size:1.7vmin;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.2vmin;}
 
 /* slide 2 — bonus board (auto-fits 4 or 5 teams) */
 .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(30vmin,44%),1fr));gap:2vmin;align-content:center;}
 .bonus-card{background:linear-gradient(165deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:2vmin;padding:2.4vmin 2.2vmin;display:flex;flex-direction:column;min-width:0;}
-.bonus-card .tname{font-style:italic;font-weight:800;font-size:2.4vmin;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.bonus-total{font-weight:700;font-size:6vmin;line-height:1;margin:1.6vmin 0 .5vmin;color:var(--cream);}
-.bonus-lbl{font-size:1.5vmin;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.8vmin;}
-.bk{display:flex;justify-content:space-between;gap:1vmin;font-size:1.8vmin;padding:.8vmin 0;border-top:1px solid var(--border-soft);color:var(--muted);}
+.bonus-card .tname{font-style:italic;font-weight:800;font-size:2.8vmin;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bonus-total{font-weight:700;font-size:7vmin;line-height:1;margin:1.6vmin 0 .5vmin;color:var(--cream);}
+.bonus-lbl{font-size:1.7vmin;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.8vmin;}
+.bk{display:flex;justify-content:space-between;gap:1vmin;font-size:2.1vmin;padding:.8vmin 0;border-top:1px solid var(--border-soft);color:var(--muted);}
 .bk b{color:var(--cream);font-weight:600;}
-.crown{font-size:1.5vmin;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:auto;padding-top:1.4vmin;}
+.crown{font-size:1.7vmin;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:auto;padding-top:1.4vmin;}
 
 /* slide 3 — leaders */
 .lead-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:5vmin;align-content:center;height:100%;}
 .lead-row{display:grid;grid-template-columns:max-content 1fr max-content max-content;align-items:center;gap:1.8vmin;padding:1.3vmin .4vmin;border-bottom:1px solid var(--border-soft);min-width:0;}
-.lead-rank{font-style:italic;font-weight:900;font-size:2.7vmin;color:var(--bronze-bright);min-width:4.2vmin;}
+.lead-rank{font-style:italic;font-weight:900;font-size:3vmin;color:var(--bronze-bright);min-width:4.2vmin;}
 .lead-row.top .lead-rank{color:var(--gold);}
-.lead-club{color:var(--muted);font-weight:400;font-size:1.9vmin;}
-.lead-name{font-weight:600;font-size:2.4vmin;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
-.lead-team{font-size:1.5vmin;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.5vmin 1.2vmin;border-radius:2vmin;text-align:center;border:1px solid var(--border-soft);white-space:nowrap;}
-.lead-n{font-weight:700;font-size:2.5vmin;text-align:right;color:var(--cream);white-space:nowrap;}
-.lead-n small{font-size:1.4vmin;color:var(--muted);font-weight:400;margin-left:.4vmin;}
+.lead-club{color:var(--muted);font-weight:400;font-size:2.1vmin;}
+.lead-name{font-weight:600;font-size:2.7vmin;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.lead-team{font-size:1.7vmin;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.5vmin 1.2vmin;border-radius:2vmin;text-align:center;border:1px solid var(--border-soft);white-space:nowrap;}
+.lead-n{font-weight:700;font-size:2.8vmin;text-align:right;color:var(--cream);white-space:nowrap;}
+.lead-n small{font-size:1.5vmin;color:var(--muted);font-weight:400;margin-left:.4vmin;}
 
 /* slide 4 — interclub */
 .ic-row{display:grid;grid-template-columns:minmax(20vmin,28vmin) 1fr max-content;align-items:center;gap:2.4vmin;padding:1.7vmin 0;}
-.ic-club{font-style:italic;font-weight:800;font-size:2.8vmin;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ic-club{font-style:italic;font-weight:800;font-size:3.2vmin;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .ic-stats{text-align:right;min-width:14vmin;}
-.ic-stats .line1{font-weight:700;font-size:2.6vmin;color:var(--cream);white-space:nowrap;}
-.ic-stats .line2{font-size:1.7vmin;color:var(--muted);margin-top:.3vmin;white-space:nowrap;}
+.ic-stats .line1{font-weight:700;font-size:3vmin;color:var(--cream);white-space:nowrap;}
+.ic-stats .line2{font-size:2vmin;color:var(--muted);margin-top:.3vmin;white-space:nowrap;}
 
 /* registration mode */
 .reg-row{display:grid;grid-template-columns:1fr max-content;align-items:center;gap:2.4vmin;padding:1.9vmin 0;border-bottom:1px solid var(--border-soft);}
-.reg-count{font-weight:700;font-size:4.6vmin;color:var(--cream);line-height:1;text-align:right;min-width:14vmin;}
-.reg-count small{display:block;font-size:1.4vmin;color:var(--muted);font-weight:400;letter-spacing:.14em;text-transform:uppercase;margin-top:.3vmin;}
-.countdown{font-style:italic;font-weight:900;font-size:2.2vmin;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;}
+.reg-count{font-weight:700;font-size:5.4vmin;color:var(--cream);line-height:1;text-align:right;min-width:14vmin;}
+.reg-count small{display:block;font-size:1.6vmin;color:var(--muted);font-weight:400;letter-spacing:.14em;text-transform:uppercase;margin-top:.3vmin;}
+.countdown{font-style:italic;font-weight:900;font-size:2.6vmin;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;}
 
 /* footer */
 .foot{display:flex;align-items:center;justify-content:space-between;gap:2vmin;margin-top:2.2vmin;}
 .dots{display:flex;gap:1.4vmin;}
 .dot{width:7vmin;height:.7vmin;border-radius:.35vmin;background:var(--border);transition:background .4s;}
 .dot.on{background:var(--gold);}
-.tag{font-size:1.6vmin;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:right;}
+.tag{font-size:1.8vmin;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:right;}
 
 .preview{position:fixed;top:1.4vmin;right:1.4vmin;font-size:1.5vmin;letter-spacing:.18em;text-transform:uppercase;color:#000;background:var(--gold);padding:.6vmin 1.2vmin;border-radius:.8vmin;font-weight:700;z-index:99;}
 
@@ -126,11 +126,11 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 </div>
 
 <script>
-const DATA = {"club": "Altea Winnipeg", "day": 11, "total_days": 60, "teams": {"Strength": {"members": 96, "avg": 3.1, "pct": 7.7, "finished": 2, "bonus": 89, "dealers": 18, "rx": 29, "master": 8, "social": 14, "captains": ["Tiffany A.", "Samara M."]}, "Shred": {"members": 105, "avg": 2.9, "pct": 7.2, "finished": 1, "bonus": 110, "dealers": 17, "rx": 23, "master": 12, "social": 8, "captains": ["Jenna G.", "Aleksia D."]}, "Longevity": {"members": 82, "avg": 3.0, "pct": 7.6, "finished": 3, "bonus": 118, "dealers": 29, "rx": 36, "master": 8, "social": 18, "captains": ["YuJie B.", "Lex M."]}, "Endurance": {"members": 106, "avg": 3.3, "pct": 8.2, "finished": 2, "bonus": 128, "dealers": 27, "rx": 23, "master": 8, "social": 12, "captains": ["Gabe M.", "Eric S."]}}, "leaders": [{"name": "Marilyn M.", "team": "Endurance", "workouts": 23, "bonus": 0}, {"name": "Manal A.", "team": "Shred", "workouts": 22, "bonus": 0}, {"name": "Paula N.", "team": "Longevity", "workouts": 21, "bonus": 0}, {"name": "Wanda J.", "team": "Strength", "workouts": 18, "bonus": 0}, {"name": "Elizabeth J.", "team": "Shred", "workouts": 18, "bonus": 0}, {"name": "Hang N.", "team": "Longevity", "workouts": 18, "bonus": 0}, {"name": "Kari G.", "team": "Strength", "workouts": 16, "bonus": 0}, {"name": "Sushma S.", "team": "Strength", "workouts": 15, "bonus": 0}, {"name": "Stacey W.", "team": "Endurance", "workouts": 15, "bonus": 0}, {"name": "Kalie M.", "team": "Endurance", "workouts": 14, "bonus": 2}, {"name": "Alex V.", "team": "Shred", "workouts": 14, "bonus": 0}, {"name": "Bryce B.", "team": "Strength", "workouts": 13, "bonus": 3}], "allleaders": [{"name": "Maya R.", "club": "OTT", "team": "Shred", "workouts": 24}, {"name": "Marilyn M.", "club": "WPG", "team": "Endurance", "workouts": 23}, {"name": "Manal A.", "club": "WPG", "team": "Shred", "workouts": 22}, {"name": "Liam C.", "club": "LV", "team": "Strength", "workouts": 22}, {"name": "Priya S.", "club": "AVT YV", "team": "Longevity", "workouts": 22}, {"name": "Paula N.", "club": "WPG", "team": "Longevity", "workouts": 21}, {"name": "Dario F.", "club": "W6", "team": "Endurance", "workouts": 21}, {"name": "Anne-Marie L.", "club": "OTT", "team": "Sport Performance", "workouts": 21}, {"name": "Kofi A.", "club": "LV", "team": "Shred", "workouts": 20}, {"name": "Jess W.", "club": "W6", "team": "Sport Performance", "workouts": 19}, {"name": "Hana K.", "club": "AVT YV", "team": "Endurance", "workouts": 19}, {"name": "Wanda J.", "club": "WPG", "team": "Strength", "workouts": 18}], "total_signups": 389, "interclub": [{"club": "Winnipeg", "signups": 389, "avgpct": 7.7}, {"club": "Ottawa", "signups": 412, "avgpct": 24.5}, {"club": "Liberty Village", "signups": 389, "avgpct": 29.1}, {"club": "West 6", "signups": 356, "avgpct": 22.3}, {"club": "AVANT Yorkville", "signups": 248, "avgpct": 31.6}]};
+const SAMPLE = {"club": "Altea Winnipeg", "day": 11, "total_days": 60, "teams": {"Strength": {"members": 96, "avg": 3.1, "pct": 7.7, "finished": 2, "bonus": 89, "dealers": 18, "rx": 29, "master": 8, "social": 14, "captains": ["Tiffany A.", "Samara M."]}, "Shred": {"members": 105, "avg": 2.9, "pct": 7.2, "finished": 1, "bonus": 110, "dealers": 17, "rx": 23, "master": 12, "social": 8, "captains": ["Jenna G.", "Aleksia D."]}, "Longevity": {"members": 82, "avg": 3.0, "pct": 7.6, "finished": 3, "bonus": 118, "dealers": 29, "rx": 36, "master": 8, "social": 18, "captains": ["YuJie B.", "Lex M."]}, "Endurance": {"members": 106, "avg": 3.3, "pct": 8.2, "finished": 2, "bonus": 128, "dealers": 27, "rx": 23, "master": 8, "social": 12, "captains": ["Gabe M.", "Eric S."]}}, "leaders": [{"name": "Marilyn M.", "team": "Endurance", "workouts": 23, "bonus": 0}, {"name": "Manal A.", "team": "Shred", "workouts": 22, "bonus": 0}, {"name": "Paula N.", "team": "Longevity", "workouts": 21, "bonus": 0}, {"name": "Wanda J.", "team": "Strength", "workouts": 18, "bonus": 0}, {"name": "Elizabeth J.", "team": "Shred", "workouts": 18, "bonus": 0}, {"name": "Hang N.", "team": "Longevity", "workouts": 18, "bonus": 0}, {"name": "Kari G.", "team": "Strength", "workouts": 16, "bonus": 0}, {"name": "Sushma S.", "team": "Strength", "workouts": 15, "bonus": 0}, {"name": "Stacey W.", "team": "Endurance", "workouts": 15, "bonus": 0}, {"name": "Kalie M.", "team": "Endurance", "workouts": 14, "bonus": 2}, {"name": "Alex V.", "team": "Shred", "workouts": 14, "bonus": 0}, {"name": "Bryce B.", "team": "Strength", "workouts": 13, "bonus": 3}], "allleaders": [{"name": "Maya R.", "club": "OTT", "team": "Shred", "workouts": 24}, {"name": "Marilyn M.", "club": "WPG", "team": "Endurance", "workouts": 23}, {"name": "Manal A.", "club": "WPG", "team": "Shred", "workouts": 22}, {"name": "Liam C.", "club": "LV", "team": "Strength", "workouts": 22}, {"name": "Priya S.", "club": "AVT YV", "team": "Longevity", "workouts": 22}, {"name": "Paula N.", "club": "WPG", "team": "Longevity", "workouts": 21}, {"name": "Dario F.", "club": "W6", "team": "Endurance", "workouts": 21}, {"name": "Anne-Marie L.", "club": "OTT", "team": "Sport Performance", "workouts": 21}, {"name": "Kofi A.", "club": "LV", "team": "Shred", "workouts": 20}, {"name": "Jess W.", "club": "W6", "team": "Sport Performance", "workouts": 19}, {"name": "Hana K.", "club": "AVT YV", "team": "Endurance", "workouts": 19}, {"name": "Wanda J.", "club": "WPG", "team": "Strength", "workouts": 18}], "total_signups": 389, "interclub": [{"club": "Winnipeg", "signups": 389, "avgpct": 7.7}, {"club": "Ottawa", "signups": 412, "avgpct": 24.5}, {"club": "Liberty Village", "signups": 389, "avgpct": 29.1}, {"club": "West 6", "signups": 356, "avgpct": 22.3}, {"club": "AVANT Yorkville", "signups": 248, "avgpct": 31.6}]};
 
 /* CONFIG — editable */
 const CONFIG = {
-  slideSeconds: 12,
+  slideSeconds: 20,
   leadersShown: {landscape: 12, portrait: 10},
   dates: {            // YYYY-MM-DD, local time
     regOpen:  '2026-06-15',
@@ -156,6 +156,27 @@ const dayNum = Math.min(60, Math.max(1, Math.round((today - d0(CONFIG.dates.star
 const daysToKickoff = Math.max(0, Math.round((d0(CONFIG.dates.start) - today)/86400000));
 const regOpenNow = today >= d0(CONFIG.dates.regOpen) && today <= d0(CONFIG.dates.regClose);
 
+/* ---- per-club data loader ----
+   Screen URL picks its club:  ?club=wpg | w6 | ott | lv | avtyv
+   Loads data/<club>.json written by c60_daily.py. With no ?club= (or if the
+   file is missing / opened locally), it falls back to the embedded SAMPLE so
+   the preview still renders. */
+const _params = new URLSearchParams(location.search);
+const _club = (_params.get('club') || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+const _badge = document.querySelector('.preview');
+async function boot(){
+  let DATA = SAMPLE;
+  if (_club){
+    try{
+      const resp = await fetch('data/' + _club + '.json', {cache:'no-store'});
+      if (resp.ok){ DATA = await resp.json(); if (_badge) _badge.remove(); }
+      else if (_badge){ _badge.textContent = 'Sample — data/' + _club + '.json not found'; }
+    } catch(e){ if (_badge){ _badge.textContent = 'Sample — data load failed'; } }
+  }
+  render(DATA);
+}
+
+function render(DATA){
 document.getElementById('club').textContent = DATA.club;
 const dayEl = document.querySelector('.day');
 if (MODE==='reg') dayEl.innerHTML = '<span class="countdown">'+(daysToKickoff>0 ? 'Kickoff in '+daysToKickoff+' day'+(daysToKickoff===1?'':'s') : 'Kickoff today')+'</span>';
@@ -248,7 +269,6 @@ if (MODE==='reg'){
     {t:(MODE==='final'?'Final — ':'')+'The Team Race', s:'Average progress toward 40 workouts per member'+finalTag, h:()=>s1},
     {t:'The Bonus Board', s:"Dealer's Choice · Rx Scans · Masterclasses · Socials", h:()=>s2},
     {t:'Club Leaders', s:'Most workouts completed — '+DATA.club, h:leadersHTML},
-    {t:'Club vs Club', s:'Which club is most committed?', h:()=>s4},
     {t:'All-Club Leaders', s:'Top individuals across every club', h:allLeadersHTML}
   ];
 }
@@ -273,9 +293,12 @@ setInterval(()=>{cur=(cur+1)%slides.length;show(cur);}, CONFIG.slideSeconds*1000
 window.matchMedia('(orientation:portrait)').addEventListener('change',()=>{
   if (MODE!=='reg'){
     els[2].querySelector('.content').innerHTML = leadersHTML();
-    els[4].querySelector('.content').innerHTML = allLeadersHTML();
+    els[3].querySelector('.content').innerHTML = allLeadersHTML();
   }
 });
+}  /* end render */
+
+boot();
 </script>
 </body>
 </html>
