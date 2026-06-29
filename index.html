@@ -35,23 +35,23 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 .slides{position:relative;flex:1;min-height:0;}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;display:flex;flex-direction:column;}
 .slide.on{opacity:1;}
-.slide-title{font-style:italic;font-weight:800;font-size:3.6vmin;text-transform:uppercase;letter-spacing:.04em;color:var(--cream);margin-bottom:.7vmin;}
-.slide-sub{font-size:2vmin;color:var(--muted);margin-bottom:0.8vmin;letter-spacing:.04em;}
+.slide-title{font-style:italic;font-weight:800;font-size:4vmin;text-transform:uppercase;letter-spacing:.04em;color:var(--cream);margin-bottom:.7vmin;}
+.slide-sub{font-size:2.2vmin;color:var(--muted);margin-bottom:1vmin;letter-spacing:.04em;}
 .content{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly;overflow:hidden;}
 
-.bar{height:2.4vmin;background:var(--surface);border:1px solid var(--border-soft);border-radius:1.7vmin;overflow:hidden;position:relative;min-width:8vmin;}
+.bar{height:3vmin;background:var(--surface);border:1px solid var(--border-soft);border-radius:1.7vmin;overflow:hidden;position:relative;min-width:8vmin;}
 .fill{height:100%;border-radius:1.7vmin;width:0;transition:width 1.4s cubic-bezier(.2,.7,.2,1);}
 
 /* slide 1 — team race */
-.race-row{padding:0.5vmin 0;}
+.race-row{padding:0.8vmin 0;}
 .race-head{display:flex;align-items:center;gap:1.6vmin;flex-wrap:wrap;}
 .race-head .race-caps{margin-left:auto;margin-top:0;}
-.race-barwrap{display:flex;align-items:center;gap:2vmin;margin-top:0.4vmin;}
+.race-barwrap{display:flex;align-items:center;gap:2vmin;margin-top:0.6vmin;}
 .race-barwrap .bar{flex:1;}
 .race-team{display:flex;align-items:center;gap:1.4vmin;min-width:0;}
 .chip{width:1.6vmin;height:1.6vmin;border-radius:50%;flex:0 0 auto;}
-.race-name{font-style:italic;font-weight:800;font-size:2.6vmin;text-transform:uppercase;letter-spacing:.02em;line-height:1.05;}
-.race-meta{font-size:1.7vmin;color:var(--muted);margin-top:.2vmin;}
+.race-name{font-style:italic;font-weight:800;font-size:3vmin;text-transform:uppercase;letter-spacing:.02em;line-height:1.05;}
+.race-meta{font-size:2vmin;color:var(--muted);margin-top:.3vmin;}
 .race-caps{font-size:1.9vmin;color:var(--bronze-bright);margin-top:.3vmin;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .race-pct{font-weight:700;font-size:3.2vmin;text-align:right;color:var(--cream);min-width:10vmin;}
 .race-pct small{display:block;font-weight:400;font-size:1.7vmin;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.2vmin;}
