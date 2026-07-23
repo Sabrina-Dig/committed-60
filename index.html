@@ -84,6 +84,20 @@ body{font-family:'Archivo','Segoe UI',system-ui,sans-serif;color:var(--text);-we
 .ic-stats .line1{font-weight:700;font-size:3vmin;color:var(--cream);white-space:nowrap;}
 .ic-stats .line2{font-size:2vmin;color:var(--muted);margin-top:.3vmin;white-space:nowrap;}
 
+/* slide — finisher wall */
+.wall{position:relative;flex:1;min-height:0;overflow:hidden;width:100%;}
+.wall-list{display:flex;flex-direction:column;gap:1vmin;will-change:transform;}
+.wall.scrolling::after{content:'';position:absolute;left:0;right:0;bottom:0;height:9vmin;background:linear-gradient(180deg,rgba(0,0,0,0),var(--bg));pointer-events:none;}
+.wall.scrolling::before{content:'';position:absolute;left:0;right:0;top:0;height:3vmin;background:linear-gradient(0deg,rgba(0,0,0,0),var(--bg));pointer-events:none;z-index:1;}
+.fin-row{display:flex;align-items:center;gap:1.8vmin;background:var(--surface);border:1px solid var(--border-soft);border-radius:1.4vmin;padding:1.5vmin 2.2vmin;flex:none;}
+.fin-row.newest{border-color:var(--gold);}
+.fin-dot{width:1.5vmin;height:1.5vmin;border-radius:50%;flex:none;}
+.fin-name{font-weight:600;font-size:2.5vmin;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fin-new{font-size:1.5vmin;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#000;background:var(--gold);border-radius:.7vmin;padding:.35vmin 1vmin;flex:none;}
+.fin-date{margin-left:auto;font-size:1.8vmin;color:var(--muted);letter-spacing:.06em;white-space:nowrap;flex:none;}
+.fin-team{flex:none;font-size:1.7vmin;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1px solid;border-radius:.9vmin;padding:.5vmin 1.5vmin;white-space:nowrap;}
+.fin-count{float:right;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+
 /* registration mode */
 .reg-row{display:grid;grid-template-columns:1fr max-content;align-items:center;gap:2.4vmin;padding:1.9vmin 0;border-bottom:1px solid var(--border-soft);}
 .reg-count{font-weight:700;font-size:5.4vmin;color:var(--cream);line-height:1;text-align:right;min-width:14vmin;}
@@ -236,6 +250,39 @@ function allLeadersHTML(){
       <div class="lead-n">${m.workouts}<small>/ 40</small></div>
     </div>`).join('')+'</div>';
 }
+function finWallHTML(){
+  const fs = DATA.finishers || [];
+  const t0 = new Date(); t0.setHours(0,0,0,0);
+  const age = d => Math.round((t0 - new Date(d+'T00:00:00')) / 86400000);
+  const lbl = d => { const a = age(d);
+    return a<=0 ? 'Today' : a===1 ? 'Yesterday' : new Date(d+'T00:00:00').toLocaleDateString('en-CA',{month:'short',day:'numeric'}); };
+  return '<div class="wall"><div class="wall-list">'+fs.map((f,i)=>`
+    <div class="fin-row${i===0?' newest':''}">
+      <span class="fin-dot" style="background:${tc(f.team)}"></span>
+      <span class="fin-name">${f.name}</span>
+      ${age(f.date)<=1?'<span class="fin-new">New</span>':''}
+      <span class="fin-date">${lbl(f.date)}</span>
+      <span class="fin-team" style="color:${tc(f.team)};border-color:${tc(f.team)}">${f.team}</span>
+    </div>`).join('')+'</div></div>';
+}
+function startWall(){
+  const wall = document.querySelector('.wall'); if (!wall) return;
+  const list = wall.querySelector('.wall-list');
+  if (list.scrollHeight <= wall.clientHeight + 1) return;  /* fits on screen — no scroll */
+  if (!wall.dataset.dup){ list.innerHTML += list.innerHTML; wall.dataset.dup = '1'; wall.classList.add('scrolling'); }
+  if (wall.dataset.anim) return;
+  wall.dataset.anim = '1';
+  let y = 0, last = performance.now();
+  const vmin = () => Math.min(innerWidth, innerHeight) / 100;
+  (function tick(now){
+    const dt = (now - last) / 1000; last = now;
+    y += 3.2 * vmin() * dt;              /* scroll speed: vmin per second */
+    const half = list.scrollHeight / 2;
+    if (y >= half) y -= half;
+    list.style.transform = 'translateY(' + (-y) + 'px)';
+    requestAnimationFrame(tick);
+  })(performance.now());
+}
 const maxPct = Math.max(...DATA.interclub.map(c=>c.avgpct));
 const s4 = [...DATA.interclub].sort((a,b)=>b.avgpct-a.avgpct).map((c,i)=>`
   <div class="ic-row">
@@ -278,6 +325,13 @@ if (MODE==='reg'){
     {t:'Club Leaders', s:'Most workouts completed — '+DATA.club, h:leadersHTML},
     {t:'All-Club Leaders', s:'Top individuals across every club', h:allLeadersHTML}
   ];
+  /* Finisher Wall — after Club Leaders, only once the club has 10+ finishers */
+  const fins = DATA.finishers || [];
+  if (fins.length >= 10){
+    slides.splice(3, 0, {t:'The Finisher Wall',
+      s:'40 workouts. Done. Every '+DATA.club+' finisher.',
+      h:finWallHTML});
+  }
 }
 
 const wrap = document.getElementById('slides'), dotsEl = document.getElementById('dots');
@@ -296,11 +350,13 @@ function show(i){
   els[i].querySelectorAll('.fill').forEach(f=>{f.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=f.dataset.w+'%'));});
 }
 show(0);
+requestAnimationFrame(()=>startWall());   /* wall exists off-screen; start its scroll once laid out */
 setInterval(()=>{cur=(cur+1)%slides.length;show(cur);}, CONFIG.slideSeconds*1000);
 window.matchMedia('(orientation:portrait)').addEventListener('change',()=>{
   if (MODE!=='reg'){
-    els[2].querySelector('.content').innerHTML = leadersHTML();
-    els[3].querySelector('.content').innerHTML = allLeadersHTML();
+    const li = slides.findIndex(s=>s.h===leadersHTML), ai = slides.findIndex(s=>s.h===allLeadersHTML);
+    if (li>=0) els[li].querySelector('.content').innerHTML = leadersHTML();
+    if (ai>=0) els[ai].querySelector('.content').innerHTML = allLeadersHTML();
   }
 });
 }  /* end render */
