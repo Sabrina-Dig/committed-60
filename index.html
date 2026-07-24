@@ -149,6 +149,7 @@ const SAMPLE = {"club": "Altea Winnipeg", "day": 11, "total_days": 60, "teams": 
 /* CONFIG — editable */
 const CONFIG = {
   slideSeconds: 20,
+  wallSeconds: 35,   /* Finisher Wall stays up longer so the scroll can play out */
   leadersShown: {landscape: 20, portrait: 16},
   dates: {            // YYYY-MM-DD, local time
     regOpen:  '2026-06-15',
@@ -319,19 +320,17 @@ if (MODE==='reg'){
   ];
 } else {
   const finalTag = MODE==='final' ? ' — '+CONFIG.dates.awardsLabel : '';
+  /* Finisher Wall slots in 2nd, only once the club has 10+ finishers */
+  const fins = DATA.finishers || [];
   slides = [
+    {t:'Club Leaders', s:'Most workouts completed — '+DATA.club, h:leadersHTML},
+    ...(fins.length >= 10 ? [{t:'The Finisher Wall',
+        s:'40 workouts. Done. Every '+DATA.club+' finisher.',
+        h:finWallHTML, secs:CONFIG.wallSeconds}] : []),
     {t:(MODE==='final'?'Final — ':'')+'The Team Race', s:'Average progress toward 40 workouts per member'+finalTag, h:()=>s1},
     {t:'The Bonus Board', s:"Dealer's Choice · Rx Scans · Masterclasses · Socials", h:()=>s2},
-    {t:'Club Leaders', s:'Most workouts completed — '+DATA.club, h:leadersHTML},
     {t:'All-Club Leaders', s:'Top individuals across every club', h:allLeadersHTML}
   ];
-  /* Finisher Wall — after Club Leaders, only once the club has 10+ finishers */
-  const fins = DATA.finishers || [];
-  if (fins.length >= 10){
-    slides.splice(3, 0, {t:'The Finisher Wall',
-      s:'40 workouts. Done. Every '+DATA.club+' finisher.',
-      h:finWallHTML});
-  }
 }
 
 const wrap = document.getElementById('slides'), dotsEl = document.getElementById('dots');
@@ -351,7 +350,10 @@ function show(i){
 }
 show(0);
 requestAnimationFrame(()=>startWall());   /* wall exists off-screen; start its scroll once laid out */
-setInterval(()=>{cur=(cur+1)%slides.length;show(cur);}, CONFIG.slideSeconds*1000);
+(function next(){
+  setTimeout(()=>{cur=(cur+1)%slides.length;show(cur);next();},
+    (slides[cur].secs || CONFIG.slideSeconds)*1000);
+})();
 window.matchMedia('(orientation:portrait)').addEventListener('change',()=>{
   if (MODE!=='reg'){
     const li = slides.findIndex(s=>s.h===leadersHTML), ai = slides.findIndex(s=>s.h===allLeadersHTML);
